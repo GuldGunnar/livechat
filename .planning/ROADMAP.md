@@ -31,7 +31,7 @@ None (standard web stack patterns)
 **Depends on**: Nothing (first phase)
 **Requirements**: None (foundation enables all requirements)
 **Research**: Unlikely (standard NAHE stack patterns)
-**Plans**: TBD
+**Plans**: 01-01-PLAN.md
 
 ### Phase 2: Tracking Script Core
 **Goal**: Create embeddable JavaScript snippet that detects visitor arrivals
@@ -100,7 +100,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 →
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation | 0/? | Not started | - |
+| 1. Foundation | 0/1 | Planned | - |
 | 2. Tracking Script Core | 0/? | Not started | - |
 | 3. Visitor Identification | 0/? | Not started | - |
 | 4. Dashboard Foundation | 0/? | Not started | - |
