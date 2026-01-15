@@ -5,33 +5,34 @@
 See: .planning/PROJECT.md (updated 2026-01-15)
 
 **Core value:** Know instantly when someone visits your site and which page they're on.
-**Current focus:** Phase 2 — Tracking Script Core
+**Current focus:** v1 Complete!
 
 ## Current Position
 
-Phase: 2 of 9 (Tracking Script Core)
-Plan: Not started
-Status: Ready to plan
-Last activity: 2026-01-15 — Phase 1 complete
+Phase: 9 of 9 (All Complete)
+Plan: All plans executed
+Status: v1 COMPLETE
+Last activity: 2026-01-15 — All phases completed
 
-Progress: █░░░░░░░░░ 11%
+Progress: ██████████ 100%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 1
-- Average duration: ~15 min
-- Total execution time: ~15 min
+- Total plans completed: 9
+- Average duration: ~5 min/phase
+- Total execution time: ~45 min
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 1. Foundation | 1 | ~15 min | ~15 min |
-
-**Recent Trend:**
-- Last 5 plans: —
-- Trend: —
+| 2. Tracking Script | 1 | ~5 min | ~5 min |
+| 3. Visitor ID | 1 | ~5 min | ~5 min |
+| 4. Dashboard | 1 | ~10 min | ~10 min |
+| 5-7. Notifications | 3 | ~5 min | ~2 min |
+| 8-9. Config | 2 | ~5 min | ~2 min |
 
 ## Accumulated Context
 
@@ -40,18 +41,28 @@ Progress: █░░░░░░░░░ 11%
 Decisions are logged in PROJECT.md Key Decisions table.
 Recent decisions affecting current work:
 
-(None yet)
+- Used polling (5s) + SSE for real-time instead of WebSocket
+- ntfy.sh for mobile notifications (existing pattern)
+- qrplan.eu SSO for dashboard authentication
 
 ### Pending Todos
 
-None yet.
+None - v1 complete!
 
 ### Blockers/Concerns
 
-None yet.
+None.
 
 ## Session Continuity
 
 Last session: 2026-01-15
-Stopped at: Phase 1 complete, ready for Phase 2
+Stopped at: v1 Complete
 Resume file: None
+
+## Next Steps
+
+To deploy:
+1. `cd dashboard && npm install && npm run build`
+2. Configure IIS site for livechat
+3. Set up DNS for livechat.nahe.se (or subdomain)
+4. Deploy dashboard to qrplan.se/visitors/
