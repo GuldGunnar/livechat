@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visitor Tracker - Test Page</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 { color: #333; }
+        code {
+            background: #e9e9e9;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Consolas', monospace;
+        }
+        pre {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+        .status {
+            padding: 10px 15px;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
+        .status.success { background: #d4edda; color: #155724; }
+        .status.error { background: #f8d7da; color: #721c24; }
+        .status.info { background: #cce5ff; color: #004085; }
+    </style>
+</head>
+<body>
+    <h1>Visitor Tracker - Test</h1>
+
+    <div class="card">
+        <h2>Status</h2>
+        <div id="status" class="status info">Laddar...</div>
+        <p><strong>Visitor Token:</strong> <code id="token">-</code></p>
+    </div>
+
+    <div class="card">
+        <h2>Installation</h2>
+        <p>Lägg till detta script på din webbsida:</p>
+        <pre>&lt;script src="https://livechat.nahe.se/widget/tracker.js"
+        data-domain="din-domain.se"&gt;&lt;/script&gt;</pre>
+    </div>
+
+    <div class="card">
+        <h2>Hur det fungerar</h2>
+        <ul>
+            <li>Scriptet genererar en unik <code>visitor_token</code> som sparas i localStorage/cookie</li>
+            <li>När besökaren landar på sidan skickas ett <code>enter</code> event</li>
+            <li>Var 30:e sekund skickas en <code>heartbeat</code> för att hålla besöket aktivt</li>
+            <li>När besökaren lämnar skickas ett <code>exit</code> event</li>
+            <li>SPA-navigation (pushState) hanteras automatiskt</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2>Test-länkar</h2>
+        <p>Klicka för att testa SPA-navigation:</p>
+        <button onclick="testNavigation()">Simulera sidnavigering</button>
+        <button onclick="checkAPI()">Testa API</button>
+    </div>
+
+    <!-- Visitor Tracker Script -->
+    <script src="tracker.js" data-domain="localhost"></script>
+
+    <script>
+        // Show visitor token
+        document.getElementById('token').textContent =
+            localStorage.getItem('vt_visitor_token') || 'Genereras...';
+
+        // Update status after script loads
+        setTimeout(function() {
+            document.getElementById('status').textContent = 'Tracking aktivt!';
+            document.getElementById('status').className = 'status success';
+            document.getElementById('token').textContent =
+                localStorage.getItem('vt_visitor_token') || 'Okänt';
+        }, 1000);
+
+        // Test navigation
+        function testNavigation() {
+            history.pushState({}, '', '/test-page-' + Date.now());
+            alert('Navigerade till: ' + window.location.pathname);
+        }
+
+        // Test API directly
+        function checkAPI() {
+            fetch('/api/')
+                .then(r => r.json())
+                .then(data => {
+                    alert('API Status: ' + JSON.stringify(data, null, 2));
+                })
+                .catch(err => {
+                    alert('API Error: ' + err.message);
+                });
+        }
+    </script>
+</body>
+</html>
