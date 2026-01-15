@@ -27,6 +27,7 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/../../includes/db.php';
 require_once __DIR__ . '/../../includes/response.php';
+require_once __DIR__ . '/../../includes/visitor.php';
 
 // Only POST allowed
 requireMethod('POST');
@@ -41,10 +42,6 @@ $pageTitle = $input['page_title'] ?? null;
 $visitorToken = $input['visitor_token'];
 $action = $input['action'] ?? 'enter';
 
-// Get client info
-$ipAddress = $_SERVER['HTTP_X_FORWARDED_FOR'] ?? $_SERVER['REMOTE_ADDR'] ?? null;
-$userAgent = $_SERVER['HTTP_USER_AGENT'] ?? null;
-
 // Find project by domain
 $project = dbQueryOne(
     "SELECT id, enabled FROM projects WHERE domain = ? AND enabled = 1",
@@ -57,28 +54,8 @@ if (!$project) {
 
 $projectId = (int) $project['id'];
 
-// Find or create visitor
-$visitor = dbQueryOne(
-    "SELECT id FROM visitors WHERE visitor_token = ?",
-    [$visitorToken]
-);
-
-if ($visitor) {
-    $visitorId = (int) $visitor['id'];
-
-    // Update last seen and IP (might have changed)
-    dbExecute(
-        "UPDATE visitors SET last_seen = NOW(), ip_address = ? WHERE id = ?",
-        [$ipAddress, $visitorId]
-    );
-} else {
-    // Create new visitor
-    dbExecute(
-        "INSERT INTO visitors (visitor_token, ip_address, user_agent) VALUES (?, ?, ?)",
-        [$visitorToken, $ipAddress, $userAgent]
-    );
-    $visitorId = (int) dbLastInsertId();
-}
+// Find or create visitor using enhanced identification
+$visitorId = findOrCreateVisitor($visitorToken)
 
 // Handle action
 switch ($action) {
