@@ -113,13 +113,21 @@ function routeVisitors(?string $id, string $method): void
  */
 function routeProjects(?string $id, string $method): void
 {
+    global $action;
+
     if ($id === null) {
         // GET/POST /api/projects - List or create
         require __DIR__ . '/projects/index.php';
     } elseif (is_numeric($id)) {
-        // GET/PUT/DELETE /api/projects/{id} - Single project
         $_REQUEST['project_id'] = (int) $id;
-        require __DIR__ . '/projects/single.php';
+
+        if ($action === 'notifications') {
+            // GET/PUT /api/projects/{id}/notifications
+            require __DIR__ . '/projects/notifications.php';
+        } else {
+            // GET/PUT/DELETE /api/projects/{id} - Single project
+            require __DIR__ . '/projects/single.php';
+        }
     } else {
         jsonError('Invalid project ID', 400);
     }
