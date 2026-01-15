@@ -67,22 +67,22 @@ Which phases cover which requirements. Updated by create-roadmap.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| TRACK-01 | - | Pending |
-| TRACK-02 | - | Pending |
-| TRACK-03 | - | Pending |
-| NOTIF-01 | - | Pending |
-| NOTIF-02 | - | Pending |
-| NOTIF-03 | - | Pending |
-| DASH-01 | - | Pending |
-| DASH-02 | - | Pending |
-| PROJ-01 | - | Pending |
-| PROJ-02 | - | Pending |
+| TRACK-01 | Phase 2 | Pending |
+| TRACK-02 | Phase 2 | Pending |
+| TRACK-03 | Phase 3 | Pending |
+| NOTIF-01 | Phase 6 | Pending |
+| NOTIF-02 | Phase 7 | Pending |
+| NOTIF-03 | Phase 9 | Pending |
+| DASH-01 | Phase 4 | Pending |
+| DASH-02 | Phase 5 | Pending |
+| PROJ-01 | Phase 8 | Pending |
+| PROJ-02 | Phase 8 | Pending |
 
 **Coverage:**
 - v1 requirements: 10 total
-- Mapped to phases: 0 (pending roadmap)
-- Unmapped: 10 ⚠️
+- Mapped to phases: 10
+- Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-01-15*
-*Last updated: 2026-01-15 after initial definition*
+*Last updated: 2026-01-15 after roadmap creation*
