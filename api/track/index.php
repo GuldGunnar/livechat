@@ -28,6 +28,7 @@ declare(strict_types=1);
 require_once __DIR__ . '/../../includes/db.php';
 require_once __DIR__ . '/../../includes/response.php';
 require_once __DIR__ . '/../../includes/visitor.php';
+require_once __DIR__ . '/../../includes/notifications.php';
 
 // Only POST allowed
 requireMethod('POST');
@@ -55,7 +56,10 @@ if (!$project) {
 $projectId = (int) $project['id'];
 
 // Find or create visitor using enhanced identification
-$visitorId = findOrCreateVisitor($visitorToken)
+$visitorId = findOrCreateVisitor($visitorToken);
+
+// Get visitor data for notifications
+$visitor = dbQueryOne("SELECT * FROM visitors WHERE id = ?", [$visitorId]);
 
 // Handle action
 switch ($action) {
@@ -74,6 +78,9 @@ switch ($action) {
             [$projectId, $visitorId, $pageUrl, $pageTitle]
         );
         $visitId = (int) dbLastInsertId();
+
+        // Send notification for new visitor
+        notifyNewVisitor($projectId, $visitor, $pageUrl, $pageTitle);
         break;
 
     case 'exit':

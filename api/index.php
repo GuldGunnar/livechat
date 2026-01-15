@@ -55,6 +55,11 @@ try {
             routeProjects($id, $method);
             break;
 
+        case 'events':
+            // SSE endpoint for real-time updates
+            require __DIR__ . '/events/index.php';
+            break;
+
         case '':
             // API root - return info
             jsonResponse([
