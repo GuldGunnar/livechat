@@ -1,8 +1,10 @@
 # Dependencies
 node_modules/
 
-# Build output (keep dist/ but not source maps)
+# Build output
 *.map
+dashboard-dist/
+dist/
 
 # Logs
 logs/*.log

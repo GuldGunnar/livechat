@@ -34,14 +34,20 @@ livechat/
 │   ├── index.php           # API router
 │   ├── track/              # Tracking endpoint (from widget)
 │   ├── visitors/           # Visitor management
-│   └── projects/           # Project management
+│   ├── projects/           # Project management
+│   └── events/             # SSE real-time events
 ├── includes/               # Shared PHP utilities
 │   ├── db.php              # Database connection
 │   ├── cors.php            # CORS handling
-│   └── response.php        # JSON response helpers
+│   ├── response.php        # JSON response helpers
+│   ├── visitor.php         # Visitor identification
+│   └── notifications.php   # ntfy.sh integration
+├── dashboard/              # Built React dashboard
+├── dashboard-src/          # Dashboard source code
 ├── widget/                 # Embeddable tracking script
 ├── sql/                    # Database migrations
 ├── logs/                   # Application logs
+├── index.php               # Landing page
 └── .planning/              # GSD planning files
 ```
 
@@ -105,14 +111,27 @@ curl http://localhost/livechat/api/
 
 ## Phase Status
 
+**v1 Complete!** All 9 phases finished.
+
 See `.planning/ROADMAP.md` for full roadmap.
 
-- Phase 1: Foundation *(in progress)*
-- Phase 2: Tracking Script Core
-- Phase 3: Visitor Identification
-- Phase 4: Dashboard Foundation
-- Phase 5: Real-time Display
-- Phase 6: Browser Push
-- Phase 7: Mobile Notifications
-- Phase 8: Project Management
-- Phase 9: Notification Config
+- [x] Phase 1: Foundation
+- [x] Phase 2: Tracking Script Core
+- [x] Phase 3: Visitor Identification
+- [x] Phase 4: Dashboard Foundation
+- [x] Phase 5: Real-time Display
+- [x] Phase 6: Browser Push
+- [x] Phase 7: Mobile Notifications
+- [x] Phase 8: Project Management
+- [x] Phase 9: Notification Config
+
+## Deployment
+
+**IIS Site:** livechat on port 8088
+**API URL:** http://192.168.0.213:8088/api/
+
+### Embed Tracker
+```html
+<script src="http://192.168.0.213:8088/widget/tracker.js"
+        data-domain="your-domain.com"></script>
+```

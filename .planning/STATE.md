@@ -12,7 +12,7 @@ See: .planning/PROJECT.md (updated 2026-01-15)
 Phase: 9 of 9 (All Complete)
 Plan: All plans executed
 Status: v1 COMPLETE
-Last activity: 2026-01-15 — All phases completed
+Last activity: 2026-01-17 — v1 tested and verified
 
 Progress: ██████████ 100%
 
@@ -61,8 +61,15 @@ Resume file: None
 
 ## Next Steps
 
-To deploy:
-1. `cd dashboard && npm install && npm run build`
-2. Configure IIS site for livechat
-3. Set up DNS for livechat.nahe.se (or subdomain)
-4. Deploy dashboard to qrplan.se/visitors/
+**Deployed and tested on port 8088:**
+- [x] IIS site configured (livechat on port 8088)
+- [x] Dashboard built and deployed
+- [x] Tracker script embedded on qrplan.eu
+- [x] API tested (enter/exit/heartbeat)
+- [x] ntfy.sh notifications configured
+
+**For production:**
+1. Set up DNS for livechat.nahe.se
+2. Configure SSL certificate
+3. Update tracker.js API URL to production
+4. Configure dashboard SSO redirect URLs

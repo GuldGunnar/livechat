@@ -25,7 +25,7 @@ function LoadingScreen() {
 
 // Login redirect to qrplan.eu
 function LoginRedirect() {
-  window.location.href = 'https://qrplan.eu/login.php?redirect=/visitors/';
+  window.location.href = 'https://qrplan.eu/login.php?redirect=/dashboard/';
   return <LoadingScreen />;
 }
 
@@ -115,7 +115,7 @@ function AppRoutes() {
 
 function App() {
   return (
-    <BrowserRouter basename="/visitors">
+    <BrowserRouter basename="/dashboard">
       <AuthProvider>
         <AppRoutes />
       </AuthProvider>

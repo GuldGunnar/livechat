@@ -11,7 +11,7 @@
     'use strict';
 
     // Configuration
-    var API_URL = 'https://livechat.nahe.se/api/track';
+    var API_URL = 'http://192.168.0.213:8088/api/track';
     var HEARTBEAT_INTERVAL = 30000; // 30 seconds
     var STORAGE_KEY = 'vt_visitor_token';
 
