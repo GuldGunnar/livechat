@@ -2,16 +2,18 @@
  * Visitor Card Component
  *
  * Displays a single visitor with their current page.
+ * Clickable to show visitor details.
  */
 
-import { Globe, Clock, User } from 'lucide-react';
+import { Globe, Clock, User, Monitor, Smartphone, Tablet } from 'lucide-react';
 import type { Visitor } from '../api/client';
 
 interface VisitorCardProps {
   visitor: Visitor;
+  onClick?: () => void;
 }
 
-export function VisitorCard({ visitor }: VisitorCardProps) {
+export function VisitorCard({ visitor, onClick }: VisitorCardProps) {
   const displayName = visitor.alias || `Besökare #${visitor.id}`;
   const currentPage = visitor.current_page;
 
@@ -31,8 +33,24 @@ export function VisitorCard({ visitor }: VisitorCardProps) {
     return `${diffHours} timmar`;
   };
 
+  // Get device icon based on screen width
+  const getDeviceIcon = () => {
+    const width = visitor.screen_width || 0;
+    if (width > 0 && width < 768) return Smartphone;
+    if (width >= 768 && width < 1024) return Tablet;
+    return Monitor;
+  };
+
+  const DeviceIcon = getDeviceIcon();
+
   return (
-    <div className="bg-white rounded-lg border border-gray-200 p-4 hover:shadow-md transition">
+    <div
+      onClick={onClick}
+      className="bg-white rounded-lg border border-gray-200 p-4 hover:shadow-md hover:border-primary-300 transition cursor-pointer"
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => e.key === 'Enter' && onClick?.()}
+    >
       <div className="flex items-start justify-between gap-4">
         {/* Visitor info */}
         <div className="flex items-center gap-3 min-w-0">
@@ -41,9 +59,18 @@ export function VisitorCard({ visitor }: VisitorCardProps) {
           </div>
           <div className="min-w-0">
             <h3 className="font-medium text-gray-900 truncate">{displayName}</h3>
-            {visitor.ip_address && (
-              <p className="text-sm text-gray-500">{visitor.ip_address}</p>
-            )}
+            <div className="flex items-center gap-2 text-sm text-gray-500">
+              {visitor.ip_address && <span>{visitor.ip_address}</span>}
+              {visitor.os && (
+                <>
+                  <span className="text-gray-300">•</span>
+                  <span className="flex items-center gap-1">
+                    <DeviceIcon className="w-3.5 h-3.5" />
+                    {visitor.os}
+                  </span>
+                </>
+              )}
+            </div>
           </div>
         </div>
 

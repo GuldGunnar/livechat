@@ -10,6 +10,7 @@ import { Header } from './components/Header';
 import { Dashboard } from './pages/Dashboard';
 import { Projects } from './pages/Projects';
 import { Settings } from './pages/Settings';
+import { Statistics } from './pages/Statistics';
 
 // Loading spinner
 function LoadingScreen() {
@@ -104,6 +105,16 @@ function AppRoutes() {
           <ProtectedRoute>
             <MainLayout>
               <Settings />
+            </MainLayout>
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/statistics"
+        element={
+          <ProtectedRoute>
+            <MainLayout>
+              <Statistics />
             </MainLayout>
           </ProtectedRoute>
         }

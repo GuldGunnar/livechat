@@ -64,6 +64,10 @@ export interface Visitor {
   alias: string | null;
   ip_address: string | null;
   last_seen: string;
+  os?: string | null;
+  browser?: string | null;
+  screen_width?: number | null;
+  screen_height?: number | null;
   current_page?: {
     url: string;
     title: string | null;

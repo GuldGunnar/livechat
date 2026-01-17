@@ -7,11 +7,13 @@
 import { useState, useEffect } from 'react';
 import { Plus, Globe, Users, Settings, Trash2, Check, X } from 'lucide-react';
 import { api, type Project, type ProjectsResponse } from '../api/client';
+import { ProjectSettingsModal } from '../components/ProjectSettingsModal';
 
 export function Projects() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [showAddModal, setShowAddModal] = useState(false);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   const fetchProjects = async () => {
     try {
@@ -145,6 +147,7 @@ export function Projects() {
                   <td className="px-4 py-3">
                     <div className="flex items-center justify-end gap-2">
                       <button
+                        onClick={() => setSelectedProject(project)}
                         className="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded"
                         title="Inställningar"
                       >
@@ -180,6 +183,19 @@ export function Projects() {
           onClose={() => setShowAddModal(false)}
           onSave={() => {
             setShowAddModal(false);
+            fetchProjects();
+          }}
+        />
+      )}
+
+      {/* Project Settings Modal */}
+      {selectedProject && (
+        <ProjectSettingsModal
+          project={selectedProject}
+          isOpen={true}
+          onClose={() => setSelectedProject(null)}
+          onSave={() => {
+            setSelectedProject(null);
             fetchProjects();
           }}
         />

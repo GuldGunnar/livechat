@@ -8,12 +8,14 @@ import { useState, useEffect } from 'react';
 import { Users, Globe, Activity, RefreshCw } from 'lucide-react';
 import { api, type Visitor, type VisitorsResponse } from '../api/client';
 import { VisitorCard } from '../components/VisitorCard';
+import { VisitorDetailModal } from '../components/VisitorDetailModal';
 
 export function Dashboard() {
   const [visitors, setVisitors] = useState<Visitor[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [lastUpdate, setLastUpdate] = useState<Date>(new Date());
+  const [selectedVisitor, setSelectedVisitor] = useState<Visitor | null>(null);
 
   const fetchVisitors = async () => {
     try {
@@ -144,11 +146,30 @@ export function Dashboard() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {projectVisitors.map((visitor) => (
-              <VisitorCard key={visitor.id} visitor={visitor} />
+              <VisitorCard
+                key={visitor.id}
+                visitor={visitor}
+                onClick={() => setSelectedVisitor(visitor)}
+              />
             ))}
           </div>
         </div>
       ))}
+
+      {/* Visitor detail modal */}
+      {selectedVisitor && (
+        <VisitorDetailModal
+          visitor={selectedVisitor}
+          isOpen={true}
+          onClose={() => setSelectedVisitor(null)}
+          onUpdate={(updatedVisitor) => {
+            setVisitors((prev) =>
+              prev.map((v) => (v.id === updatedVisitor.id ? updatedVisitor : v))
+            );
+            setSelectedVisitor(updatedVisitor);
+          }}
+        />
+      )}
     </div>
   );
 }
