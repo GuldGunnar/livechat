@@ -14,6 +14,7 @@ import {
   Copy,
   Check,
   ExternalLink,
+  Smartphone,
 } from 'lucide-react';
 
 interface ProjectSettingsModalProps {
@@ -201,6 +202,25 @@ export function ProjectSettingsModal({
                 <p className="text-xs text-gray-500 mt-1">
                   Topic-namn på ntfy.sh (t.ex. "visitor-alerts")
                 </p>
+                {ntfyTopic && (
+                  <div className="mt-3 p-3 bg-amber-50 border border-amber-200 rounded-lg flex items-start gap-2">
+                    <Smartphone className="w-4 h-4 text-amber-600 mt-0.5 flex-shrink-0" />
+                    <div className="text-sm">
+                      <p className="text-amber-800">
+                        Kom ihåg att prenumerera på detta topic i ntfy-appen på din telefon.
+                      </p>
+                      <a
+                        href={`https://ntfy.sh/${ntfyTopic}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-amber-700 hover:text-amber-900 underline inline-flex items-center gap-1 mt-1"
+                      >
+                        Öppna i ntfy.sh
+                        <ExternalLink className="w-3 h-3" />
+                      </a>
+                    </div>
+                  </div>
+                )}
               </div>
             )}
           </div>

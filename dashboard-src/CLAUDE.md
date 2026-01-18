@@ -80,6 +80,7 @@ dashboard-src/
 - **Browser notifications**: Shows popup when new visitor arrives
 - **Sound notifications**: Plays beep tone
 - **ntfy notifications**: Server-side push to ntfy.sh
+- **ntfy subscription reminder**: When topic is set, shows reminder with direct link
 - Configured per-project in Project Settings
 
 ### Projects

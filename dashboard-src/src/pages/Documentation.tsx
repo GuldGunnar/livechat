@@ -372,7 +372,7 @@ function ProjectsContent() {
           Klicka på kugghjulet på ett projekt för att redigera inställningar.
         </p>
 
-        <SubSection title="Tillgängliga inställningar">
+        <SubSection title="Grundinställningar">
           <div className="space-y-3">
             <div className="flex items-start gap-3">
               <span className="px-2 py-1 bg-blue-100 text-blue-700 rounded text-sm font-medium">
@@ -386,13 +386,51 @@ function ProjectsContent() {
               </span>
               <span className="text-gray-600">Begränsa tracking till en specifik domän</span>
             </div>
+          </div>
+        </SubSection>
+
+        <SubSection title="Notifikationer">
+          <p className="text-gray-600 mb-3">
+            Konfigurera hur du vill bli notifierad när en ny besökare anländer.
+          </p>
+          <div className="space-y-3">
             <div className="flex items-start gap-3">
-              <span className="px-2 py-1 bg-blue-100 text-blue-700 rounded text-sm font-medium">
-                Aktiv
+              <span className="px-2 py-1 bg-green-100 text-green-700 rounded text-sm font-medium">
+                Webbläsarnotiser
               </span>
-              <span className="text-gray-600">Aktivera/inaktivera tracking för projektet</span>
+              <span className="text-gray-600">Visa notiser i webbläsaren (kräver tillåtelse)</span>
+            </div>
+            <div className="flex items-start gap-3">
+              <span className="px-2 py-1 bg-green-100 text-green-700 rounded text-sm font-medium">
+                Ljudnotis
+              </span>
+              <span className="text-gray-600">Spela ett ljud när nya besökare anländer</span>
+            </div>
+            <div className="flex items-start gap-3">
+              <span className="px-2 py-1 bg-green-100 text-green-700 rounded text-sm font-medium">
+                ntfy-notiser
+              </span>
+              <span className="text-gray-600">Push-notiser till din telefon via ntfy.sh</span>
             </div>
           </div>
+        </SubSection>
+
+        <SubSection title="ntfy - Mobilnotiser">
+          <p className="text-gray-600 mb-3">
+            Med ntfy kan du få push-notiser direkt till din telefon när någon besöker din sajt.
+          </p>
+          <StepList
+            steps={[
+              'Aktivera "ntfy-notiser" i projektinställningarna',
+              'Ange ett unikt topic-namn (t.ex. "mina-besokare")',
+              'Installera ntfy-appen på din telefon (Android/iOS)',
+              'Prenumerera på samma topic i appen',
+            ]}
+          />
+          <InfoBox>
+            När du anger ett topic visas en påminnelse med direktlänk till ntfy.sh där du kan
+            prenumerera på topic:et i din webbläsare eller app.
+          </InfoBox>
         </SubSection>
       </Section>
 

@@ -151,6 +151,7 @@ See `.planning/ROADMAP.md` for full roadmap.
 - [x] Project settings modal with embed code
 - [x] Device detection (OS, browser, screen resolution)
 - [x] Statistics page with charts and date filtering
+- [x] ntfy subscription reminder with direct link to topic
 
 ## Deployment
 
