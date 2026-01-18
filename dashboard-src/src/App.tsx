@@ -11,6 +11,7 @@ import { Dashboard } from './pages/Dashboard';
 import { Projects } from './pages/Projects';
 import { Settings } from './pages/Settings';
 import { Statistics } from './pages/Statistics';
+import { Documentation } from './pages/Documentation';
 
 // Loading spinner
 function LoadingScreen() {
@@ -115,6 +116,16 @@ function AppRoutes() {
           <ProtectedRoute>
             <MainLayout>
               <Statistics />
+            </MainLayout>
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/documentation"
+        element={
+          <ProtectedRoute>
+            <MainLayout>
+              <Documentation />
             </MainLayout>
           </ProtectedRoute>
         }

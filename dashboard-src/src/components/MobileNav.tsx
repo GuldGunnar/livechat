@@ -6,7 +6,7 @@
 
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { X, LayoutDashboard, Users, Settings, BarChart3, LogOut } from 'lucide-react';
+import { X, LayoutDashboard, Users, Settings, BarChart3, LogOut, BookOpen } from 'lucide-react';
 
 interface MobileNavProps {
   isOpen: boolean;
@@ -21,6 +21,7 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
     { path: '/', label: 'Dashboard', icon: LayoutDashboard },
     { path: '/projects', label: 'Projekt', icon: Users },
     { path: '/statistics', label: 'Statistik', icon: BarChart3 },
+    { path: '/documentation', label: 'Dokumentation', icon: BookOpen },
     { path: '/settings', label: 'Inställningar', icon: Settings },
   ];
 

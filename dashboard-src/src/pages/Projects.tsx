@@ -17,7 +17,7 @@ export function Projects() {
 
   const fetchProjects = async () => {
     try {
-      const data = await api.get<ProjectsResponse>('/projects');
+      const data = await api.get<ProjectsResponse>('/visitors/projects');
       setProjects(data.projects);
     } catch (err) {
       console.error('Failed to fetch projects:', err);
@@ -32,7 +32,7 @@ export function Projects() {
 
   const toggleProject = async (project: Project) => {
     try {
-      await api.put(`/projects/${project.id}`, {
+      await api.put(`/visitors/projects/${project.id}`, {
         enabled: project.enabled ? 0 : 1,
       });
       fetchProjects();
@@ -46,7 +46,7 @@ export function Projects() {
       return;
     }
     try {
-      await api.delete(`/projects/${project.id}`);
+      await api.delete(`/visitors/projects/${project.id}`);
       fetchProjects();
     } catch (err) {
       console.error('Failed to delete project:', err);
@@ -214,7 +214,7 @@ function AddProjectModal({ onClose, onSave }: { onClose: () => void; onSave: () 
     setIsSubmitting(true);
 
     try {
-      await api.post('/projects', { name, domain });
+      await api.post('/visitors/projects', { name, domain });
       onSave();
     } catch (err) {
       console.error('Failed to create project:', err);

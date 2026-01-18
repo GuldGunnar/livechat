@@ -6,16 +6,25 @@
 
 import { useState, useEffect } from 'react';
 import { Users, Globe, Activity, RefreshCw } from 'lucide-react';
-import { api, type Visitor, type VisitorsResponse } from '../api/client';
+import { api, type Visitor, type VisitorsResponse, type Project, type ProjectsResponse } from '../api/client';
 import { VisitorCard } from '../components/VisitorCard';
 import { VisitorDetailModal } from '../components/VisitorDetailModal';
+import { useNotifications } from '../hooks/useNotifications';
 
 export function Dashboard() {
   const [visitors, setVisitors] = useState<Visitor[]>([]);
+  const [projects, setProjects] = useState<Project[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [lastUpdate, setLastUpdate] = useState<Date>(new Date());
   const [selectedVisitor, setSelectedVisitor] = useState<Visitor | null>(null);
+
+  // Notification hook - handles browser and sound notifications
+  useNotifications({
+    visitors,
+    projects,
+    enabled: true,
+  });
 
   const fetchVisitors = async () => {
     try {
@@ -30,8 +39,18 @@ export function Dashboard() {
     }
   };
 
+  const fetchProjects = async () => {
+    try {
+      const data = await api.get<ProjectsResponse>('/visitors/projects');
+      setProjects(data.projects);
+    } catch (err) {
+      console.error('Failed to fetch projects:', err);
+    }
+  };
+
   useEffect(() => {
     fetchVisitors();
+    fetchProjects();
 
     // Poll every 5 seconds
     const interval = setInterval(fetchVisitors, 5000);

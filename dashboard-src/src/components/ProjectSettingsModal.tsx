@@ -72,7 +72,7 @@ export function ProjectSettingsModal({
     setIsSaving(true);
 
     try {
-      await api.put(`/projects/${project.id}`, {
+      await api.put(`/visitors/projects/${project.id}`, {
         name,
         domain,
         notification_browser: notificationBrowser ? 1 : 0,

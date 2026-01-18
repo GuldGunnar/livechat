@@ -8,7 +8,7 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Users, Settings, LayoutDashboard, LogOut, Menu, BarChart3 } from 'lucide-react';
+import { Users, Settings, LayoutDashboard, LogOut, Menu, BarChart3, BookOpen } from 'lucide-react';
 import { MobileNav } from './MobileNav';
 
 export function Header() {
@@ -20,6 +20,7 @@ export function Header() {
     { path: '/', label: 'Dashboard', icon: LayoutDashboard },
     { path: '/projects', label: 'Projekt', icon: Users },
     { path: '/statistics', label: 'Statistik', icon: BarChart3 },
+    { path: '/documentation', label: 'Dokumentation', icon: BookOpen },
     { path: '/settings', label: 'Inställningar', icon: Settings },
   ];
 
